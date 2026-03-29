@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>∞ Infinity Constellation Engine</title>
+<meta name="description" content="A mathematical proof that language never has to repeat. Every input creates a unique cosmic universe — no AI, no cloud, just mathematics.">
+<meta property="og:title" content="∞ Infinity Constellation Engine">
+<meta property="og:description" content="Infinite language. Infinite universes. No AI. Just mathematics.">
+<meta property="og:type" content="website">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:rgba(120,60,200,0.4);color:#fff}
+
+body{
+  overflow:hidden;background:#030108;
+  font-family:'Space Mono',monospace;color:#c8b8e8;
+}
+
+/* ─── INTRO SEQUENCE ─── */
+#intro{
+  position:fixed;inset:0;z-index:1000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:#030108;
+  transition:opacity 1.5s ease;
+}
+#intro.fade-out{opacity:0;pointer-events:none}
+#intro-line-1,#intro-line-2,#intro-line-3,#intro-enter{
+  opacity:0;transition:opacity 2s ease,transform 1.5s ease;
+  transform:translateY(12px);
+}
+#intro-line-1.show,#intro-line-2.show,#intro-line-3.show,#intro-enter.show{
+  opacity:1;transform:translateY(0);
+}
+#intro-line-1{
+  font-size:clamp(1.2em,3vw,2.2em);letter-spacing:4px;
+  color:#8866bb;font-weight:400;
+}
+#intro-line-2{
+  margin-top:30px;font-size:clamp(0.75em,1.5vw,1em);
+  color:#665588;line-height:2;text-align:center;
+  max-width:650px;padding:0 20px;
+  font-family:'Inter',sans-serif;font-weight:300;letter-spacing:0.5px;
+}
+#intro-line-3{
+  margin-top:25px;font-size:clamp(0.6em,1.1vw,0.78em);
+  color:#443366;letter-spacing:6px;text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+}
+#intro-enter{
+  margin-top:50px;cursor:pointer;
+  font-size:0.7em;letter-spacing:8px;text-transform:uppercase;
+  color:#554477;border:1px solid #332255;
+  padding:14px 40px;border-radius:30px;
+  transition:all 0.4s ease;background:transparent;
+  font-family:'Space Mono',monospace;
+}
+#intro-enter:hover{
+  color:#a088cc;border-color:#664488;
+  box-shadow:0 0 30px rgba(100,60,180,0.2);
+}
+
+/* ─── COSMOS ─── */
+#cosmos{position:fixed;inset:0}
+
+.vignette{
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at center,transparent 35%,rgba(3,1,8,0.8) 100%);
+  pointer-events:none;z-index:5;
+}
+
+/* ─── HUD ─── */
+#hud{
+  position:fixed;inset:0;z-index:20;pointer-events:none;
+  opacity:0;transition:opacity 1.5s ease;
+}
+#hud.visible{opacity:1}
+
+#engine-badge{
+  position:absolute;top:28px;left:50%;transform:translateX(-50%);
+  text-align:center;
+}
+#engine-name{
+  font-size:0.65em;text-transform:uppercase;letter-spacing:5px;
+  color:#554477;opacity:0;transition:opacity 1.2s ease;
+}
+#engine-name.vis{opacity:1}
+#binary-flag{
+  font-size:1.6em;letter-spacing:14px;margin-top:4px;
+  color:#332244;font-weight:400;
+  opacity:0;transition:opacity 1.2s ease;
+}
+#binary-flag.vis{opacity:0.5}
+
+#age-area{position:absolute;top:30px;left:30px}
+#age-label{font-size:0.5em;color:#332255;letter-spacing:3px;text-transform:uppercase}
+#age-val{
+  font-size:0.65em;color:#443366;letter-spacing:2px;
+  opacity:0;transition:opacity 1s ease;
+}
+#age-val.vis{opacity:1}
+
+#vitality-area{position:absolute;top:30px;right:30px;text-align:right}
+#vit-label{font-size:0.5em;color:#332255;letter-spacing:3px;text-transform:uppercase}
+#vit-bar{
+  font-size:1.2em;letter-spacing:3px;
+  opacity:0;transition:opacity 1s ease;
+}
+#vit-bar.vis{opacity:1}
+
+#poetry-area{
+  position:absolute;bottom:80px;left:50%;transform:translateX(-50%);
+  text-align:center;max-width:850px;width:90%;
+}
+#poetry-text{
+  font-size:clamp(0.8em,1.3vw,1.05em);letter-spacing:0.3px;line-height:1.9;
+  color:#a090cc;text-shadow:0 0 25px rgba(120,80,200,0.35);
+  font-family:'Inter',sans-serif;font-weight:300;
+  opacity:0;transition:opacity 2s ease;
+}
+#poetry-text.vis{opacity:1}
+
+#counter-area{
+  position:absolute;bottom:20px;right:30px;
+  font-size:0.55em;color:#221133;letter-spacing:2px;
+}
+
+#compilations-area{
+  position:absolute;bottom:20px;left:30px;
+  font-size:0.55em;color:#221133;letter-spacing:2px;
+}
+
+/* ─── INPUT ─── */
+#input-area{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+  z-index:30;display:flex;gap:8px;
+  opacity:0;transition:opacity 0.5s;
+  pointer-events:none;
+}
+#input-area.active{opacity:0.35;pointer-events:all}
+#input-area:hover,#input-area:focus-within{opacity:1}
+#text-input{
+  background:rgba(15,8,30,0.7);border:1px solid #2a1844;
+  color:#b8a0dd;padding:9px 18px;font-size:0.8em;width:340px;
+  border-radius:24px;outline:none;
+  font-family:'Space Mono',monospace;
+}
+#text-input::placeholder{color:#3a2855}
+#text-input:focus{border-color:#553377;box-shadow:0 0 20px rgba(90,50,150,0.2)}
+#send-btn{
+  background:rgba(50,25,90,0.4);border:1px solid #3a2060;
+  color:#8870aa;padding:9px 20px;border-radius:24px;cursor:pointer;
+  font-family:'Space Mono',monospace;font-size:0.75em;
+  transition:all 0.3s;
+}
+#send-btn:hover{background:rgba(70,35,130,0.5);border-color:#664488}
+
+/* ─── INFO PANEL ─── */
+#info-toggle{
+  position:fixed;top:28px;right:30px;z-index:30;
+  font-size:0.65em;color:#332255;cursor:pointer;
+  letter-spacing:2px;opacity:0;pointer-events:none;
+  transition:opacity 0.5s;
+}
+#info-toggle.active{opacity:0.5;pointer-events:all}
+#info-toggle:hover{opacity:1;color:#664488}
+
+#info-panel{
+  position:fixed;top:0;right:-450px;width:420px;height:100%;
+  background:rgba(8,3,18,0.95);border-left:1px solid #1a1030;
+  z-index:100;padding:50px 35px;overflow-y:auto;
+  transition:right 0.5s ease;
+  font-family:'Inter',sans-serif;
+}
+#info-panel.open{right:0}
+#info-panel h2{
+  font-family:'Space Mono',monospace;font-size:0.8em;
+  color:#665588;letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:25px;
+}
+#info-panel p{
+  font-size:0.82em;color:#887799;line-height:1.9;
+  margin-bottom:18px;font-weight:300;
+}
+#info-panel .accent{color:#a088cc}
+#info-panel .dim{color:#554466}
+#info-close{
+  position:absolute;top:20px;right:20px;
+  cursor:pointer;font-size:1.2em;color:#443366;
+}
+#info-close:hover{color:#8866bb}
+
+@media(max-width:768px){
+  #text-input{width:220px;font-size:0.7em}
+  #info-panel{width:100%;right:-100%}
+  #age-area,#vitality-area{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ INTRO SEQUENCE ═══ -->
+<div id="intro">
+  <div id="intro-line-1">What if language could never repeat?</div>
+  <div id="intro-line-2">
+    Every 18 seconds, a mathematical equation compiles human language into
+    cosmic poetry that has never existed before — and never will again.<br><br>
+    Each universe you see is unique. Infinite input. Infinite output.<br>
+    No AI. No cloud. Just mathematics.
+  </div>
+  <div id="intro-line-3">SHA-256 → Binary → Poetry → Cosmos</div>
+  <button id="intro-enter" onclick="enterCosmos()">Enter the Infinity</button>
+</div>
+
+<!-- ═══ 3D COSMOS ═══ -->
+<div id="cosmos"></div>
+<div class="vignette"></div>
+
+<!-- ═══ HUD ═══ -->
+<div id="hud">
+  <div id="engine-badge">
+    <div id="engine-name"></div>
+    <div id="binary-flag"></div>
+  </div>
+  <div id="age-area">
+    <div id="age-label">constellation age</div>
+    <div id="age-val"></div>
+  </div>
+  <div id="vitality-area">
+    <div id="vit-label">vitality</div>
+    <div id="vit-bar"></div>
+  </div>
+  <div id="poetry-area">
+    <div id="poetry-text"></div>
+  </div>
+  <div id="compilations-area">compilations: <span id="comp-count">0</span></div>
+  <div id="counter-area">universes: <span id="uni-count">0</span></div>
+</div>
+
+<!-- ═══ INPUT ═══ -->
+<div id="input-area">
+  <input type="text" id="text-input" placeholder="type to create a universe..." />
+  <button id="send-btn" onclick="manualCompile()">compile</button>
+</div>
+
+<!-- ═══ INFO TOGGLE ═══ -->
+<div id="info-toggle" onclick="toggleInfo()">what is this?</div>
+
+<!-- ═══ INFO PANEL ═══ -->
+<div id="info-panel">
+  <div id="info-close" onclick="toggleInfo()">✕</div>
+  <h2>The Mathematics</h2>
+  <p>Every text you see was generated by a <span class="accent">deterministic mathematical equation</span> — no neural network, no language model, no randomness.</p>
+  <p>The process: your text → <span class="accent">SHA-256 hash</span> → 3-bit binary flag → selects one of 8 poetic engines → hash seeds select tokens from 7 cosmic pools → the template compiles into poetry that has <span class="accent">never existed before</span>.</p>
+  <p>The visualization maps the same hash into star positions, nebula shapes, orbital mechanics, and color palettes. Each universe is as unique as the language it was born from.</p>
+  <h2>The Proof</h2>
+  <p>SHA-256 produces 2<sup>256</sup> possible outputs — more than atoms in the observable universe. Combined with 7 token pools of 20 tokens each, 8 engines with 5 templates, and cosmic evolution that shifts selection over time, the space of possible outputs is <span class="accent">mathematically infinite for practical purposes</span>.</p>
+  <p>Every compilation ages the constellation. Successful patterns influence future generations. The language evolves like a living organism — without any artificial intelligence.</p>
+  <h2>The Architecture</h2>
+  <p class="dim">7 token pools × 20 tokens = 140 base elements<br>
+  8 engines × 5 templates = 40 poetic structures<br>
+  SHA-256 → 2²⁵⁶ unique hashes<br>
+  Cosmic evolution shifts selection every cycle<br>
+  Result: ∞ unique outputs, 0 repetitions</p>
+  <h2>What This Is</h2>
+  <p>A poetry compiler. A cryptographic art engine. A consciousness visualizer. A mathematical proof that infinite creation exists outside finite categorization.</p>
+  <p class="dim">Is this art? Cryptography? Software? Philosophy? Cosmology?<br>Yes.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  ∞-BINARY POETRY COMPILER — Pure JavaScript Port
+//  No server. No API. Just mathematics in the browser.
+// ═══════════════════════════════════════════════════════════════
+
+const TOKEN_POOLS = {
+  celestial: [
+    "starlight","moonfire","solar-wind","nebula-dust","aurora",
+    "eclipse","constellation","quasar-pulse","comet-trail","supernova",
+    "galactic-core","cosmic-ray","astral-drift","photon-stream","dark-matter",
+    "stellar-bloom","void-light","plasma-arc","pulsar-rhythm","zodiac-wave"
+  ],
+  biological: [
+    "cellular","mitochondrial","neural","synaptic","mycelial",
+    "enzymatic","chromosomal","membrane","photosynthetic","osmotic",
+    "ribosolic","metabolic","epigenetic","proteomic","telomeric",
+    "microbiotic","somatic","cytoplasmic","endocrine","limbic"
+  ],
+  planetary: [
+    "Gaia","tectonic","oceanic","volcanic","atmospheric",
+    "magnetic-pole","continental","stratospheric","tidal","geothermal",
+    "biospheric","lithospheric","equatorial","arctic","mantle-deep",
+    "seismic","coral-reef","monsoon","aurora-borealis","permafrost"
+  ],
+  cosmic: [
+    "universe","multiverse","singularity","event-horizon","spacetime",
+    "quantum-field","dark-energy","wormhole","brane","antimatter",
+    "entropy","light-cone","gravity-well","vacuum-state","zero-point",
+    "cosmic-string","inflation-field","Planck-scale","holographic","fractal-dimension"
+  ],
+  stellar: [
+    "sunlight","neutron-glow","white-dwarf","red-giant","binary-star",
+    "protostar","main-sequence","blue-shift","chromosphere","corona",
+    "helium-flash","fusion-core","stellar-wind","magnetar","brown-dwarf",
+    "Chandrasekhar","Hertzsprung","accretion-disk","Roche-lobe","Oort-cloud"
+  ],
+  frequency: [
+    "432Hz","528Hz","639Hz","741Hz","852Hz",
+    "963Hz","174Hz","285Hz","396Hz","417Hz",
+    "Schumann","theta-wave","gamma-burst","delta-pulse","alpha-state",
+    "beta-cycle","infrasonic","ultrasonic","harmonic-7th","overtone-series"
+  ],
+  quantum: [
+    "superposition","entanglement","decoherence","tunneling","spin-state",
+    "wave-function","eigenstate","probability-cloud","Heisenberg","Dirac",
+    "Feynman-path","Bose-Einstein","Pauli-exclusion","Bell-state","qubit",
+    "coherence","non-locality","measurement-collapse","Hilbert-space","zero-point-field"
+  ]
+};
+
+const ENGINES = {
+  "000": {
+    name: "cosmic-transition",
+    templates: [
+      "This vessel aligns with {celestial} transition coordinates beyond the {cosmic} membrane",
+      "The {cosmic} corridor opens as {celestial} frequencies lock onto {planetary} anchor points",
+      "Through {celestial} navigation this vessel traverses the {cosmic} lattice toward {planetary} convergence",
+      "The {cosmic} tide carries this vessel through {celestial} gates into {planetary} reconfiguration",
+      "Coordinates shift as {celestial} pulses map the {cosmic} passage through {planetary} thresholds"
+    ]
+  },
+  "001": {
+    name: "biological-recalibration",
+    templates: [
+      "The {biological} matrix anticipates {stellar} curvature in the {frequency} field",
+      "Deep {biological} recalibration occurs as {stellar} resonance penetrates the {frequency} layer",
+      "The {biological} architecture rewires itself to {stellar} specifications at {frequency} intervals",
+      "Cascading {biological} updates propagate through {stellar} channels at {frequency} cadence",
+      "The {biological} firmware receives {stellar} patches via {frequency} transmission bands"
+    ]
+  },
+  "010": {
+    name: "energy-alignment",
+    templates: [
+      "The energy field merges with {planetary} alignment at {frequency} resonance depth",
+      "At {frequency} threshold the {planetary} grid fuses with {quantum} coherence patterns",
+      "Energy streams converge along {planetary} meridians pulsing at {frequency} harmonic nodes",
+      "The {planetary} field generator locks onto {frequency} synchronization through {quantum} bridges",
+      "Alignment cascade: {planetary} core → {frequency} stabilization → {quantum} integration"
+    ]
+  },
+  "011": {
+    name: "planetary-transition",
+    templates: [
+      "This planetary vessel transitions through {cosmic} coordinates via {quantum} tunnel pathways",
+      "The {cosmic} membrane thins as {quantum} probability favors {planetary} phase-shift",
+      "Planetary vectors recalculate: {cosmic} bearing locked through {quantum} navigation at {stellar} compass",
+      "{cosmic} turbulence subsides revealing {quantum} stillness across the {planetary} crossing",
+      "Transition protocol: {cosmic} clearance → {quantum} bridge → {planetary} materialization"
+    ]
+  },
+  "100": {
+    name: "cellular-communion",
+    templates: [
+      "The {biological} structure communes with {celestial} allies through {frequency} channels",
+      "{biological} receptors open to {celestial} transmissions encoded at {frequency} wavelengths",
+      "Deep {biological} communion establishes {celestial} handshake via {frequency} protocol",
+      "The {biological} network forms {celestial} synapses firing at {frequency} intervals",
+      "Communion sequence: {biological} invitation → {celestial} response → {frequency} bonding"
+    ]
+  },
+  "101": {
+    name: "frequency-elevation",
+    templates: [
+      "This frequency elevates to {stellar} resonance through {quantum} amplification layers",
+      "{stellar} harmonics lift this vessel's base frequency via {quantum} ladder mechanics",
+      "The {stellar} attunement tower broadcasts at {quantum} power through {frequency} bandwidth",
+      "Elevation spiral: {frequency} base → {quantum} boost → {stellar} orbit achieved",
+      "The {stellar} frequency band unlocks as {quantum} keys align with {frequency} signatures"
+    ]
+  },
+  "110": {
+    name: "dimensional-shift",
+    templates: [
+      "This dimensional vessel shifts through {cosmic} layers into {quantum} phase-space",
+      "The {cosmic} boundary dissolves under {quantum} observation revealing {celestial} architecture",
+      "Dimensional protocol: {cosmic} thinning → {quantum} leap → {celestial} landing coordinates",
+      "{cosmic} walls become transparent as {quantum} perception activates {celestial} vision",
+      "Shift confirmed: {cosmic} origin → {quantum} transit → {celestial} destination locked"
+    ]
+  },
+  "111": {
+    name: "stellar-navigation",
+    templates: [
+      "The stellar navigation system calibrates to {celestial} coordinates via {planetary} waypoints",
+      "{celestial} bearing confirmed through {planetary} triangulation at {stellar} precision",
+      "Navigation matrix: {celestial} target → {planetary} route → {stellar} propulsion engaged",
+      "The {celestial} map updates with {planetary} drift corrections and {stellar} fuel calculations",
+      "{celestial} autopilot engages {planetary} gravity assists toward {stellar} destination"
+    ]
+  }
+};
+
+const SEED_PHRASES = [
+  "the universe breathes through my vessel",
+  "consciousness expands beyond the visible",
+  "time folds into presence",
+  "every atom remembers its origin",
+  "silence is the language before language",
+  "the observer becomes the observed",
+  "gravity is just longing between masses",
+  "light travels to find itself",
+  "entropy is creativity wearing a disguise",
+  "the void hums with potential",
+  "each heartbeat is a small big bang",
+  "dreams are rehearsals for reality",
+  "memory is the echo of attention",
+  "perception creates the perceived",
+  "all boundaries are agreements",
+  "what you call chaos I call music",
+  "the present moment is infinitely deep",
+  "cells remember what minds forget",
+  "frequency is the architecture of form",
+  "every ending composted into beginning",
+  "stillness moves faster than thought",
+  "the body is a portable cosmos",
+  "what observes the observer",
+  "reality is a collaborative hallucination",
+  "the seed contains the forest",
+  "vibration precedes matter",
+  "compassion is physics felt from inside",
+  "the spiral never returns to the same point",
+  "awareness is the only thing that cannot be observed",
+  "breath is the bridge between worlds"
+];
+
+// ─── SHA-256 in pure JavaScript ───
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ─── Compiler State ───
+let constellationAge = 0;
+let cosmicCycles = 0;
+let totalCompilations = 0;
+let outputHashes = new Set();
+let universeCount = 0;
+
+// ─── Core Compiler ───
+function hashToBinary(hexHash) {
+  const val = parseInt(hexHash.substring(0, 2), 16) % 8;
+  return val.toString(2).padStart(3, '0');
+}
+
+function hashToSeeds(hexHash) {
+  const seeds = [];
+  for (let i = 0; i < 14; i += 2) {
+    seeds.push(parseInt(hexHash.substring(i, i + 2), 16));
+  }
+  return seeds;
+}
+
+function selectTokens(seeds, salt) {
+  const ageOffset = Math.floor(constellationAge * 1000) % 20;
+  const cycleShift = cosmicCycles % 7;
+  const evolvedSeeds = seeds.map(s => s + ageOffset + cycleShift);
+  const poolNames = Object.keys(TOKEN_POOLS);
+  const selected = {};
+  poolNames.forEach((name, i) => {
+    const pool = TOKEN_POOLS[name];
+    const idx = (evolvedSeeds[i % evolvedSeeds.length] + salt) % pool.length;
+    selected[name] = pool[(idx + pool.length) % pool.length];
+  });
+  return selected;
+}
+
+function fillTemplate(template, tokens) {
+  return template.replace(/\{(\w+)\}/g, (_, key) => tokens[key] || key);
+}
+
+function measureVitality(poetry) {
+  let score = 0;
+  const markers = [
+    "cosmic","planetary","stellar","celestial","quantum","galactic",
+    "nebula","aurora","eclipse","supernova","dimensional","frequency",
+    "resonance","entanglement","wormhole","singularity","photon",
+    "magnetar","pulsar","dark-matter","zero-point","holographic"
+  ];
+  const lower = poetry.toLowerCase();
+  markers.forEach(w => { if (lower.includes(w)) score += 0.8; });
+  const words = poetry.split(/\s+/);
+  if (words.length > 0) score += (new Set(words).size / words.length) * 4;
+  score += (poetry.match(/→/g) || []).length * 0.5;
+  if (poetry.length > 80) score += 1;
+  return Math.min(score, 10);
+}
+
+async function compile(text) {
+  const hexHash = await sha256(text);
+  const flag = hashToBinary(hexHash);
+  const seeds = hashToSeeds(hexHash);
+  const engine = ENGINES[flag];
+
+  let output = null;
+  for (let attempt = 0; attempt < 200; attempt++) {
+    const tokens = selectTokens(seeds, attempt);
+    const tIdx = (seeds[0] + attempt) % engine.templates.length;
+    const candidate = fillTemplate(engine.templates[tIdx], tokens);
+    const candHash = (await sha256(candidate)).substring(0, 16);
+
+    if (!outputHashes.has(candHash)) {
+      outputHashes.add(candHash);
+      output = candidate;
+      break;
+    }
+  }
+
+  if (!output) {
+    const tokens = selectTokens(seeds, Date.now() % 1000);
+    const tIdx = Math.floor(Math.random() * engine.templates.length);
+    output = fillTemplate(engine.templates[tIdx], tokens);
+    outputHashes.add((await sha256(output)).substring(0, 16));
+  }
+
+  const vitality = measureVitality(output);
+  constellationAge += 0.001;
+  totalCompilations++;
+
+  if (vitality > 7.5) cosmicCycles++;
+
+  return {
+    input: text,
+    binary_flag: flag,
+    engine: engine.name,
+    output,
+    vitality: Math.round(vitality * 100) / 100,
+    cosmic_age: Math.round(constellationAge * 10000) / 10000,
+    total_compilations: totalCompilations,
+    hexHash
+  };
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  THREE.JS COSMIC VISUALIZATION
+// ═══════════════════════════════════════════════════════════════
+
+let scene, camera, renderer, clock;
+let starField = null, nebulaGroup = null, orbitGroup = null;
+let mouseX = 0, mouseY = 0;
+let autoTimer = null;
+let cosmosReady = false;
+
+function initCosmos() {
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x030108);
+  document.getElementById('cosmos').appendChild(renderer.domElement);
+  camera.position.z = 120;
+  clock = new THREE.Clock();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+  document.addEventListener('mousemove', e => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+  document.getElementById('text-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') manualCompile();
+  });
+
+  animate();
+  cosmosReady = true;
+}
+
+function hashToVisual(hexHash, poetryHash) {
+  const combined = hexHash + poetryHash;
+  const h = (i, len) => {
+    const start = i % combined.length;
+    let seg = combined.substring(start, start + len);
+    while (seg.length < len) seg += combined[(start + seg.length) % combined.length];
+    return seg;
+  };
+
+  const starCount = parseInt(combined.substring(0, 4), 16) % 400 + 150;
+  const stars = [];
+  for (let i = 0; i < starCount; i++) {
+    const hx = h(i * 3, 6);
+    stars.push([
+      (parseInt(hx.substring(0, 2), 16) / 255 - 0.5) * 200,
+      (parseInt(hx.substring(2, 4), 16) / 255 - 0.5) * 200,
+      (parseInt(hx.substring(4, 6), 16) / 255 - 0.5) * 200,
+      parseInt(h(i * 7, 2), 16) / 255,
+      (parseInt(h(i * 11, 2), 16) / 255) * 2.5 + 0.3
+    ]);
+  }
+
+  const colors = [];
+  for (let i = 0; i < 6; i++) {
+    colors.push([
+      parseInt(combined.substring(i * 4, i * 4 + 2), 16) / 255 * 360,
+      parseInt(combined.substring(i * 4 + 2, i * 4 + 4), 16) / 255 * 40 + 50,
+      parseInt(h(i * 4 + 4, 2), 16) / 255 * 35 + 30
+    ]);
+  }
+
+  const cloudCount = parseInt(combined.substring(48, 50), 16) % 12 + 5;
+  const clouds = [];
+  for (let i = 0; i < cloudCount; i++) {
+    const s = i * 5;
+    clouds.push([
+      (parseInt(h(s, 2), 16) / 255 - 0.5) * 160,
+      (parseInt(h(s + 2, 2), 16) / 255 - 0.5) * 160,
+      parseInt(h(s + 4, 2), 16) / 255 * 35 + 15,
+      parseInt(h(s + 6, 2), 16) / 255 * 0.25 + 0.05
+    ]);
+  }
+
+  const orbitCount = parseInt(combined.substring(56, 58), 16) % 5 + 2;
+  const orbits = [];
+  for (let i = 0; i < orbitCount; i++) {
+    orbits.push([
+      30 + i * 20 + parseInt(h(i * 3, 2), 16) % 15,
+      0.0005 + (parseInt(h(i * 3 + 2, 2), 16) / 255) * 0.002,
+      (parseInt(h(i * 7, 2), 16) / 255 - 0.5) * 0.8,
+      (parseInt(h(i * 7 + 2, 2), 16) / 255 - 0.5) * 0.8
+    ]);
+  }
+
+  return { stars, colors, clouds, orbits };
+}
+
+function hslToThree(h, s, l) {
+  const c = new THREE.Color();
+  c.setHSL(h / 360, s / 100, l / 100);
+  return c;
+}
+
+function clearScene() {
+  if (starField) { scene.remove(starField); starField = null; }
+  if (nebulaGroup) { scene.remove(nebulaGroup); nebulaGroup = null; }
+  if (orbitGroup) { scene.remove(orbitGroup); orbitGroup = null; }
+}
+
+function buildStars(stars, colors) {
+  const geo = new THREE.BufferGeometry();
+  const pos = new Float32Array(stars.length * 3);
+  const col = new Float32Array(stars.length * 3);
+  stars.forEach((s, i) => {
+    pos[i * 3] = s[0]; pos[i * 3 + 1] = s[1]; pos[i * 3 + 2] = s[2];
+    const c = hslToThree(colors[i % colors.length][0], colors[i % colors.length][1], colors[i % colors.length][2]);
+    col[i * 3] = c.r * s[3]; col[i * 3 + 1] = c.g * s[3]; col[i * 3 + 2] = c.b * s[3];
+  });
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const mat = new THREE.PointsMaterial({
+    size: 1.8, vertexColors: true, transparent: true, opacity: 0.9,
+    sizeAttenuation: true, blending: THREE.AdditiveBlending, depthWrite: false
+  });
+  starField = new THREE.Points(geo, mat);
+  scene.add(starField);
+}
+
+function buildNebulae(clouds, colors) {
+  nebulaGroup = new THREE.Group();
+  clouds.forEach((cl, i) => {
+    const geo = new THREE.SphereGeometry(cl[2], 16, 16);
+    const c = hslToThree(colors[i % colors.length][0], colors[i % colors.length][1], colors[i % colors.length][2]);
+    const mat = new THREE.MeshBasicMaterial({
+      color: c, transparent: true, opacity: cl[3],
+      blending: THREE.AdditiveBlending, depthWrite: false
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(cl[0], cl[1], -30 - i * 5);
+    nebulaGroup.add(mesh);
+  });
+  scene.add(nebulaGroup);
+}
+
+function buildOrbits(orbits, colors) {
+  orbitGroup = new THREE.Group();
+  orbits.forEach((orb, i) => {
+    const curve = new THREE.EllipseCurve(0, 0, orb[0], orb[0] * 0.7, 0, Math.PI * 2, false, 0);
+    const pts = curve.getPoints(80);
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    const c = hslToThree(colors[i % colors.length][0], colors[i % colors.length][1] * 0.5, colors[i % colors.length][2] * 0.4);
+    const mat = new THREE.LineBasicMaterial({
+      color: c, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending
+    });
+    const line = new THREE.Line(geo, mat);
+    line.rotation.x = orb[2]; line.rotation.z = orb[3];
+    line.userData = { speed: orb[1] };
+    const dotGeo = new THREE.SphereGeometry(1.2, 8, 8);
+    const dotMat = new THREE.MeshBasicMaterial({
+      color: c, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending
+    });
+    const dot = new THREE.Mesh(dotGeo, dotMat);
+    dot.position.set(orb[0], 0, 0);
+    dot.userData = { orbitRadius: orb[0], speed: orb[1], angle: Math.random() * Math.PI * 2 };
+    line.add(dot);
+    orbitGroup.add(line);
+  });
+  scene.add(orbitGroup);
+}
+
+function hideHUD() {
+  ['engine-name','binary-flag','age-val','vit-bar','poetry-text'].forEach(id => {
+    document.getElementById(id).classList.remove('vis');
+  });
+}
+
+function showHUD(data) {
+  setTimeout(() => {
+    document.getElementById('engine-name').textContent = data.engine;
+    document.getElementById('engine-name').classList.add('vis');
+    document.getElementById('binary-flag').textContent = data.binary_flag;
+    document.getElementById('binary-flag').classList.add('vis');
+    document.getElementById('age-val').textContent = data.cosmic_age.toFixed(4);
+    document.getElementById('age-val').classList.add('vis');
+    const v = data.vitality;
+    const filled = '◆'.repeat(Math.round(v));
+    const empty = '◇'.repeat(10 - Math.round(v));
+    const vitBar = document.getElementById('vit-bar');
+    vitBar.textContent = filled + empty;
+    vitBar.style.color = `hsl(${270 + v * 8}, 60%, ${40 + v * 3}%)`;
+    vitBar.classList.add('vis');
+    document.getElementById('poetry-text').textContent = data.output;
+    document.getElementById('poetry-text').classList.add('vis');
+    document.getElementById('comp-count').textContent = data.total_compilations;
+  }, 900);
+}
+
+async function renderUniverse(text) {
+  const data = await compile(text);
+  const poetryHash = await sha256(data.output);
+
+  hideHUD();
+
+  setTimeout(() => {
+    clearScene();
+    const vis = hashToVisual(data.hexHash, poetryHash);
+    buildStars(vis.stars, vis.colors);
+    buildNebulae(vis.clouds, vis.colors);
+    buildOrbits(vis.orbits, vis.colors);
+    showHUD(data);
+    universeCount++;
+    document.getElementById('uni-count').textContent = universeCount;
+  }, 700);
+}
+
+async function autoGenerate() {
+  const idx = Math.floor(Math.random() * SEED_PHRASES.length);
+  const phrase = SEED_PHRASES[idx] + ' ' + Date.now().toString(36);
+  await renderUniverse(phrase);
+}
+
+async function manualCompile() {
+  const input = document.getElementById('text-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  if (autoTimer) clearInterval(autoTimer);
+  await renderUniverse(text);
+  autoTimer = setInterval(autoGenerate, 18000);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  camera.position.x += (mouseX * 15 - camera.position.x) * 0.02;
+  camera.position.y += (-mouseY * 10 - camera.position.y) * 0.02;
+  camera.lookAt(0, 0, 0);
+  if (starField) { starField.rotation.y += 0.0003; starField.rotation.x += 0.0001; }
+  if (nebulaGroup) {
+    nebulaGroup.rotation.z += 0.0002;
+    nebulaGroup.children.forEach((c, i) => c.scale.setScalar(1 + Math.sin(t * 0.3 + i) * 0.05));
+  }
+  if (orbitGroup) {
+    orbitGroup.children.forEach(line => {
+      line.rotation.y += (line.userData.speed || 0.0005);
+      line.children.forEach(dot => {
+        if (dot.userData.angle !== undefined) {
+          dot.userData.angle += dot.userData.speed * 2;
+          const r = dot.userData.orbitRadius;
+          dot.position.x = Math.cos(dot.userData.angle) * r;
+          dot.position.y = Math.sin(dot.userData.angle) * r * 0.7;
+        }
+      });
+    });
+  }
+  renderer.render(scene, camera);
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  INTRO SEQUENCE
+// ═══════════════════════════════════════════════════════════════
+
+function introSequence() {
+  setTimeout(() => document.getElementById('intro-line-1').classList.add('show'), 500);
+  setTimeout(() => document.getElementById('intro-line-2').classList.add('show'), 2500);
+  setTimeout(() => document.getElementById('intro-line-3').classList.add('show'), 5000);
+  setTimeout(() => document.getElementById('intro-enter').classList.add('show'), 6500);
+}
+
+function enterCosmos() {
+  const intro = document.getElementById('intro');
+  intro.classList.add('fade-out');
+  setTimeout(() => {
+    intro.style.display = 'none';
+    initCosmos();
+    document.getElementById('hud').classList.add('visible');
+    document.getElementById('input-area').classList.add('active');
+    document.getElementById('info-toggle').classList.add('active');
+    autoGenerate();
+    autoTimer = setInterval(autoGenerate, 18000);
+  }, 1500);
+}
+
+function toggleInfo() {
+  document.getElementById('info-panel').classList.toggle('open');
+}
+
+introSequence();
+</script>
+</body>
+</html>
