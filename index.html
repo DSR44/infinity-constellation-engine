@@ -550,7 +550,10 @@ function measureVitality(poetry) {
 }
 
 async function compile(text) {
-  const hexHash = await sha256(text);
+  // Every compilation is unique: same text at compilation #1 vs #50
+  // produces completely different engine, tokens, and output
+  const uniqueInput = text + '|∞|' + totalCompilations;
+  const hexHash = await sha256(uniqueInput);
   const flag = hashToBinary(hexHash);
   const seeds = hashToSeeds(hexHash);
   const engine = ENGINES[flag];
