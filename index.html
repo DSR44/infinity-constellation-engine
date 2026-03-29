@@ -211,6 +211,7 @@ body{
     No AI. No cloud. Just mathematics.
   </div>
   <div id="intro-line-3">SHA-256 → Binary → Poetry → Cosmos</div>
+  <div id="intro-returning" style="margin-top:20px;font-size:0.65em;color:#443366;letter-spacing:2px;font-family:'Inter',sans-serif;opacity:0;transition:opacity 2s ease;transform:translateY(8px);"></div>
   <button id="intro-enter" onclick="enterCosmos()">Enter the Infinity</button>
 </div>
 
@@ -445,12 +446,36 @@ async function sha256(message) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-// ─── Compiler State ───
-let constellationAge = 0;
-let cosmicCycles = 0;
-let totalCompilations = 0;
+// ─── Evolution Memory (128 bytes that remember forever) ───
+const EVOLUTION_KEY = 'infinity_evolution';
+
+function loadEvolution() {
+  try {
+    const raw = localStorage.getItem(EVOLUTION_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  return { age: 0, cycles: 0, compilations: 0, universes: 0, born: new Date().toISOString() };
+}
+
+function saveEvolution() {
+  try {
+    localStorage.setItem(EVOLUTION_KEY, JSON.stringify({
+      age: constellationAge,
+      cycles: cosmicCycles,
+      compilations: totalCompilations,
+      universes: universeCount,
+      born: evolutionBirth
+    }));
+  } catch(e) {}
+}
+
+const evo = loadEvolution();
+let constellationAge = evo.age;
+let cosmicCycles = evo.cycles;
+let totalCompilations = evo.compilations;
+let universeCount = evo.universes;
+const evolutionBirth = evo.born;
 let outputHashes = new Set();
-let universeCount = 0;
 
 // ─── Core Compiler ───
 function hashToBinary(hexHash) {
@@ -531,8 +556,8 @@ async function compile(text) {
   const vitality = measureVitality(output);
   constellationAge += 0.001;
   totalCompilations++;
-
   if (vitality > 7.5) cosmicCycles++;
+  saveEvolution();
 
   return {
     input: text,
@@ -757,6 +782,7 @@ async function renderUniverse(text) {
     showHUD(data);
     universeCount++;
     document.getElementById('uni-count').textContent = universeCount;
+    saveEvolution();
   }, 700);
 }
 
@@ -809,10 +835,18 @@ function animate() {
 // ═══════════════════════════════════════════════════════════════
 
 function introSequence() {
+  const returning = totalCompilations > 0;
   setTimeout(() => document.getElementById('intro-line-1').classList.add('show'), 500);
   setTimeout(() => document.getElementById('intro-line-2').classList.add('show'), 2500);
   setTimeout(() => document.getElementById('intro-line-3').classList.add('show'), 5000);
-  setTimeout(() => document.getElementById('intro-enter').classList.add('show'), 6500);
+  if (returning) {
+    const el = document.getElementById('intro-returning');
+    el.textContent = `Your constellation has aged ${constellationAge.toFixed(3)} across ${universeCount} universes`;
+    setTimeout(() => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }, 5800);
+    setTimeout(() => document.getElementById('intro-enter').classList.add('show'), 7200);
+  } else {
+    setTimeout(() => document.getElementById('intro-enter').classList.add('show'), 6500);
+  }
 }
 
 function enterCosmos() {
