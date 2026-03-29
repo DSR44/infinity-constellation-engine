@@ -167,6 +167,16 @@ body{
 #info-toggle.active{opacity:0.5;pointer-events:all}
 #info-toggle:hover{opacity:1;color:#664488}
 
+#shield-link{
+  position:fixed;top:28px;right:140px;z-index:30;
+  font-size:0.65em;color:#332255;cursor:pointer;
+  letter-spacing:2px;opacity:0;pointer-events:none;
+  transition:opacity 0.5s;text-decoration:none;
+  font-family:'Space Mono',monospace;
+}
+#shield-link.active{opacity:0.4;pointer-events:all}
+#shield-link:hover{opacity:1;color:#664488}
+
 #fullscreen-btn{
   position:fixed;bottom:22px;left:30px;z-index:30;
   font-size:0.55em;color:#332255;cursor:pointer;
@@ -181,6 +191,7 @@ body{
 body.immersive #hud,
 body.immersive #input-area,
 body.immersive #info-toggle,
+body.immersive #shield-link,
 body.immersive #fullscreen-btn{
   opacity:0 !important;pointer-events:none !important;
   transition:opacity 1.5s ease;
@@ -270,6 +281,7 @@ body.immersive:hover #fullscreen-btn{
 
 <!-- ═══ INFO TOGGLE ═══ -->
 <div id="info-toggle" onclick="toggleInfo()">what is this?</div>
+<a href="shield.html" id="shield-link">shield</a>
 <button id="fullscreen-btn" onclick="toggleFullscreen()">immerse</button>
 
 <!-- ═══ INFO PANEL ═══ -->
@@ -891,6 +903,7 @@ function enterCosmos() {
     document.getElementById('hud').classList.add('visible');
     document.getElementById('input-area').classList.add('active');
     document.getElementById('info-toggle').classList.add('active');
+    document.getElementById('shield-link').classList.add('active');
     document.getElementById('fullscreen-btn').classList.add('active');
     autoGenerate();
     autoTimer = setInterval(autoGenerate, 18000);

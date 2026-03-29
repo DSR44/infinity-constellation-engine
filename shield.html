@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Infinity Shield — Privacy Through Mathematical Abundance</title>
+<meta name="description" content="A browser extension that generates a unique digital identity on every page load. Not hidden. Multiplied.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+::selection{background:rgba(120,60,200,0.4);color:#fff}
+body{
+  background:#030108;color:#c8b8e8;
+  font-family:'Courier New',Courier,monospace;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+.container{
+  max-width:680px;margin:0 auto;padding:60px 24px 80px;
+}
+
+.back{
+  display:inline-block;margin-bottom:40px;
+  font-size:0.65em;color:#443366;letter-spacing:3px;
+  text-decoration:none;text-transform:uppercase;
+  transition:color 0.3s;
+}
+.back:hover{color:#8866bb}
+
+h1{
+  font-size:clamp(1.2em,3vw,1.8em);letter-spacing:3px;
+  color:#8866bb;font-weight:400;margin-bottom:12px;
+}
+.tagline{
+  font-size:0.8em;color:#554477;line-height:1.8;
+  margin-bottom:50px;
+  font-family:system-ui,-apple-system,sans-serif;font-weight:300;
+}
+
+.download-area{
+  background:rgba(15,8,30,0.6);border:1px solid #1a1030;
+  border-radius:16px;padding:36px;margin-bottom:50px;
+  text-align:center;
+}
+.download-btn{
+  display:inline-block;
+  background:rgba(60,30,110,0.5);border:1px solid #553377;
+  color:#b8a0dd;padding:14px 40px;border-radius:28px;
+  font-family:'Courier New',monospace;font-size:0.85em;
+  letter-spacing:2px;cursor:pointer;text-decoration:none;
+  transition:all 0.3s;
+}
+.download-btn:hover{
+  background:rgba(80,40,150,0.5);border-color:#7744aa;
+  box-shadow:0 0 30px rgba(100,60,180,0.2);
+}
+.download-meta{
+  margin-top:14px;font-size:0.55em;color:#332255;letter-spacing:2px;
+}
+.version-note{
+  margin-top:20px;font-size:0.6em;color:#443366;line-height:1.8;
+  font-family:system-ui,sans-serif;font-weight:300;
+}
+
+h2{
+  font-size:0.75em;letter-spacing:4px;text-transform:uppercase;
+  color:#665588;margin:40px 0 18px;
+}
+p{
+  font-size:0.8em;color:#887799;line-height:1.9;margin-bottom:16px;
+  font-family:system-ui,-apple-system,sans-serif;font-weight:300;
+}
+.accent{color:#a088cc}
+.dim{color:#554466}
+
+ol{
+  padding-left:20px;margin-bottom:20px;
+}
+ol li{
+  font-size:0.75em;color:#887799;line-height:2.2;
+  font-family:system-ui,sans-serif;font-weight:300;
+}
+ol li code{
+  background:rgba(30,15,55,0.6);padding:2px 8px;border-radius:4px;
+  color:#a088cc;font-family:'Courier New',monospace;font-size:0.95em;
+}
+
+.how-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin:20px 0 30px;
+}
+.how-card{
+  background:rgba(10,5,20,0.5);border:1px solid #110a22;
+  border-radius:10px;padding:16px;
+}
+.how-card .label{
+  font-size:0.5em;color:#443366;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:6px;
+  font-family:system-ui,sans-serif;
+}
+.how-card .value{
+  font-size:0.65em;color:#8870aa;line-height:1.6;
+}
+
+.notice{
+  background:rgba(20,10,35,0.4);border:1px solid #1a1030;
+  border-radius:12px;padding:24px;margin:40px 0;
+}
+.notice h3{
+  font-size:0.6em;color:#554477;letter-spacing:3px;
+  text-transform:uppercase;margin-bottom:10px;
+  font-family:system-ui,sans-serif;
+}
+.notice p{
+  font-size:0.7em;margin-bottom:8px;
+}
+
+.footer-link{
+  display:block;text-align:center;margin-top:50px;
+  font-size:0.55em;color:#332255;letter-spacing:2px;
+  text-decoration:none;
+}
+.footer-link:hover{color:#664488}
+
+@media(max-width:600px){
+  .how-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="/" class="back">back to cosmos</a>
+
+  <h1>Infinity Shield</h1>
+  <p class="tagline">
+    A browser extension that generates a unique digital identity on every page load.
+    Instead of hiding you, it multiplies you into mathematically infinite people.
+    Trackers see thousands of different users where there is one.
+  </p>
+
+  <div class="download-area">
+    <a href="infinity-shield.zip" class="download-btn" download>Download Infinity Shield</a>
+    <div class="download-meta">v1.0.0 &mdash; Brave / Chrome / Edge &mdash; ~15 KB</div>
+    <div class="version-note">
+      This extension is intentionally not on any browser store.<br>
+      It stays outside their infrastructure because that's the point.<br>
+      Updates are released here. Bookmark this page.
+    </div>
+  </div>
+
+  <h2>Install</h2>
+  <ol>
+    <li>Download the <code>.zip</code> above and unzip it</li>
+    <li>Open <code>brave://extensions</code> (or <code>chrome://extensions</code>)</li>
+    <li>Turn on <span class="accent">Developer Mode</span> (toggle top right)</li>
+    <li>Click <span class="accent">Load unpacked</span></li>
+    <li>Select the unzipped folder</li>
+  </ol>
+  <p class="dim">That's it. The shield icon appears in your toolbar. Click it to see the current identity mask and toggle on/off.</p>
+
+  <h2>What It Spoofs</h2>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="label">User Agent</div>
+      <div class="value">Chrome, Firefox, Safari, Edge across Windows, Mac, Linux</div>
+    </div>
+    <div class="how-card">
+      <div class="label">Screen</div>
+      <div class="value">16 real resolutions from 1024x768 to 3840x2160</div>
+    </div>
+    <div class="how-card">
+      <div class="label">GPU</div>
+      <div class="value">12 real renderer strings: NVIDIA, AMD, Intel, Apple</div>
+    </div>
+    <div class="how-card">
+      <div class="label">Canvas</div>
+      <div class="value">Invisible pixel noise makes every canvas fingerprint unique</div>
+    </div>
+    <div class="how-card">
+      <div class="label">Audio</div>
+      <div class="value">Micro-variations in audio processing alter the audio fingerprint</div>
+    </div>
+    <div class="how-card">
+      <div class="label">Timezone</div>
+      <div class="value">33 real UTC offsets — appear in a different country each load</div>
+    </div>
+    <div class="how-card">
+      <div class="label">Language</div>
+      <div class="value">16 real language sets from English to Japanese to Norwegian</div>
+    </div>
+    <div class="how-card">
+      <div class="label">Hardware</div>
+      <div class="value">CPU cores, device memory — different specs every load</div>
+    </div>
+  </div>
+
+  <h2>How It Works</h2>
+  <p>On every page load, the extension hashes the <span class="accent">domain + timestamp + page count</span> into seed numbers. Each seed selects from pools of real-world browser data — actual user-agent strings, actual GPU models, actual screen resolutions. The website's tracking JavaScript runs after the shield, so it reads the spoofed values as if they were real.</p>
+  <p>It uses the same mathematical architecture as the <a href="/" style="color:#8866bb;text-decoration:none">Constellation Engine</a>: deterministic hash → seed numbers → selection from curated pools → unique output every time.</p>
+
+  <h2>What It Doesn't Do</h2>
+  <p>This is <span class="accent">not a VPN</span>. It doesn't hide your IP address. It doesn't block cookies. It doesn't route traffic through servers. It defeats <span class="accent">browser fingerprinting</span> specifically — the technique trackers use to identify you without cookies.</p>
+  <p>Your IP stays visible. But as we discussed: the IP becomes the decoy. It gives trackers confidence in contradictory data. Same IP, five different people from five different countries on five different machines.</p>
+
+  <div class="notice">
+    <h3>Updates</h3>
+    <p>New versions are released on this page. No auto-updates, no background connections, no silent changes. You download the new version, replace the old folder, and reload the extension.</p>
+    <p class="dim">This is intentional. A privacy tool shouldn't phone home.</p>
+  </div>
+
+  <div class="notice">
+    <h3>Source Code</h3>
+    <p>The full source is readable. Unzip the download and read every file. There are no obfuscated scripts, no minified code, no hidden network requests. The entire extension is ~15 KB of plain JavaScript.</p>
+  </div>
+
+  <a href="/" class="footer-link">constellationcompiler.art</a>
+
+</div>
+</body>
+</html>
