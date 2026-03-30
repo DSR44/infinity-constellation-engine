@@ -33,11 +33,19 @@ Input text
 
 Open `index.html` in any browser. That's it. Everything runs client-side.
 
-Or visit the live deployment: [infinity-cosmos.vercel.app](https://infinity-cosmos.vercel.app)
+Or visit the live deployment: [constellationcompiler.art](https://constellationcompiler.art)
+
+## Infinity Shield (Browser Extension)
+
+A privacy extension built on the same SHA-256 math. Generates a unique browser fingerprint on every page load — spoofing User-Agent, screen resolution, canvas, WebGL, audio context, and timezone with plausible real-world values.
+
+250 lines of JavaScript. No servers. No data collection. No storage. Fully open source.
+
+Download: [constellationcompiler.art/shield](https://constellationcompiler.art/shield)
 
 ## What Category Is This?
 
-Poetry compiler? Cryptographic art? Consciousness visualizer? Mathematical proof? Surveillance evasion? Digital cosmology?
+Poetry compiler? Cryptographic art? Consciousness visualizer? Mathematical proof? Privacy tool? Digital cosmology?
 
 Yes.
 
