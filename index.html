@@ -179,6 +179,18 @@ body{
 #shield-link.active{opacity:0.5;pointer-events:all}
 #shield-link:hover{opacity:1;color:#a088cc;border-color:#553377}
 
+#resonance-link{
+  position:fixed;bottom:22px;left:195px;z-index:30;
+  font-size:0.55em;color:#665588;cursor:pointer;
+  letter-spacing:2px;opacity:0;pointer-events:none;
+  transition:opacity 0.5s;text-decoration:none;
+  font-family:'Space Mono',monospace;
+  background:none;border:1px solid #2a1844;
+  padding:6px 14px;border-radius:16px;
+}
+#resonance-link.active{opacity:0.5;pointer-events:all}
+#resonance-link:hover{opacity:1;color:#a088cc;border-color:#553377}
+
 #fullscreen-btn{
   position:fixed;bottom:22px;left:30px;z-index:30;
   font-size:0.55em;color:#332255;cursor:pointer;
@@ -194,6 +206,7 @@ body.immersive #hud,
 body.immersive #input-area,
 body.immersive #info-toggle,
 body.immersive #shield-link,
+body.immersive #resonance-link,
 body.immersive #fullscreen-btn{
   opacity:0 !important;pointer-events:none !important;
   transition:opacity 1.5s ease;
@@ -284,6 +297,7 @@ body.immersive:hover #fullscreen-btn{
 <!-- ═══ INFO TOGGLE ═══ -->
 <div id="info-toggle" onclick="toggleInfo()">what is this?</div>
 <a href="shield.html" id="shield-link">shield</a>
+<a href="https://resonance-tool-xi.vercel.app" target="_blank" id="resonance-link">resonance</a>
 <button id="fullscreen-btn" onclick="toggleFullscreen()">immerse</button>
 
 <!-- ═══ INFO PANEL ═══ -->
@@ -906,6 +920,7 @@ function enterCosmos() {
     document.getElementById('input-area').classList.add('active');
     document.getElementById('info-toggle').classList.add('active');
     document.getElementById('shield-link').classList.add('active');
+    document.getElementById('resonance-link').classList.add('active');
     document.getElementById('fullscreen-btn').classList.add('active');
     autoGenerate();
     autoTimer = setInterval(autoGenerate, 18000);
