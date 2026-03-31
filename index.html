@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#030108">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>∞ Infinity Constellation Engine</title>
 <meta name="description" content="A mathematical proof that language never has to repeat. Every input creates a unique cosmic universe — no AI, no cloud, just mathematics.">
 <meta property="og:title" content="∞ Infinity Constellation Engine">
@@ -974,6 +979,10 @@ document.addEventListener('keydown', e => {
 });
 
 introSequence();
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
 </script>
 </body>
 </html>
