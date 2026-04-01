@@ -1,3 +1,12 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "headers": [
+    {
+      "source": "/infinity-shield.zip",
+      "headers": [
+        { "key": "Content-Disposition", "value": "attachment; filename=\"infinity-shield.zip\"" },
+        { "key": "Content-Type", "value": "application/octet-stream" }
+      ]
+    }
+  ]
 }
